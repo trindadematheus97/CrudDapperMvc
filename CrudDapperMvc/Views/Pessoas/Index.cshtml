@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CrudDapperMvc.Models.Pessoas>
+
+@{
+    ViewData["Title"] = "Listagem de pessoas";
+}
+
+<h4>Listagem de pessoas</h4>
+
+<p>
+    <a asp-action="Create" asp-controller="Pessoas" class="btn btn-outline-success btn-sm">Nova pessoas</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Peso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Idade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Peso)
+                </td>
+                <td>
+                    <div class="d-flex">
+                        <a asp-controller="Pessoas" asp-action="Edit" asp-route-pessoaId="@item.PessoaId" class="btn btn-outline-info btn-sm mr-2">Atualizar</a>
+                        <form asp-controller="Pessoas" asp-action="Delete" asp-route-pessoaId="@item.PessoaId" onsubmit="return confirm('Prosseguir com a exclusão do usuário @item.Nome?');" class="d-inline">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Excluir</button>
+                        </form>
+                    </div>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
